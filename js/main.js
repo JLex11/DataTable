@@ -100,14 +100,10 @@ class DataTable {
                         } else {
                             h.contentEditable = false;
                             h.classList.remove("editableOn");
-                            console.log(h.textContent);
                             datosEditados.push(h.textContent);
                         }
                     });
-                    input.removeEventListener("click", () => {
-                        console.log("eventListener eliminado");
-                    });
-                });
+                }, {once:true});
             } else {
                 hijo.contentEditable = true;
                 hijo.classList.add("editableOn");
@@ -188,5 +184,6 @@ btn_editar.addEventListener("click", () => {
             camposEditados.push(datosEditados);
         }
     });
+    console.log('campos editados');
     console.log(camposEditados);
 });
