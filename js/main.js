@@ -5,6 +5,7 @@ class DataTable {
     titulo;
     headers;
     trs;
+    cantRows;
     table;
     thead;
     tbody;
@@ -19,6 +20,7 @@ class DataTable {
         this.titulo = contents.titulo;
         this.headers = contents.headers;
         this.trs = contents.trs;
+        this.cantRows = Object.getOwnPropertyNames(this.trs).length - 1;
     }
 
     makeTable() {
@@ -35,9 +37,8 @@ class DataTable {
     renderTitleBar() {
         this.divTitleBar.innerHTML = `
             <div><h2>${this.titulo}</h2></div>
+            <div><span>${this.cantRows}</span></div>
         `;
-            {/* <div><span>${this.cantRows}</span></div> */}
-
     }
 
     renderHeaders() {
@@ -97,12 +98,16 @@ class DataTable {
         });
         dFragment.appendChild(tr);
         this.tbody.appendChild(dFragment);
+        this.cantRows++;
+        this.renderTitleBar();
     }
 
     eliminarFilas(idFila) {
         let filaEliminar = document.getElementById(idFila);
         let fElimParent = filaEliminar.parentNode; //parent es el tr contenedor
         fElimParent.removeChild(filaEliminar);
+        this.cantRows--;
+        this.renderTitleBar();
     }
 
     editarFilas(idFila) {
