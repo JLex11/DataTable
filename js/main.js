@@ -1,5 +1,8 @@
 class DataTable {
     elementParent;
+    divContainer;
+    divTitleBar;
+    titulo;
     headers;
     trs;
     table;
@@ -8,9 +11,12 @@ class DataTable {
 
     constructor(elementParent, contents) {
         this.elementParent = document.querySelector(elementParent);
+        this.divContainer = document.createElement('div');
+        this.divTitleBar = document.createElement('div');
         this.table = document.createElement("table");
         this.thead = document.createElement("thead");
         this.tbody = document.createElement("tbody");
+        this.titulo = contents.titulo;
         this.headers = contents.headers;
         this.trs = contents.trs;
     }
@@ -18,9 +24,20 @@ class DataTable {
     makeTable() {
         this.renderHeaders();
         this.renderTrs();
+        this.renderTitleBar();
         this.table.appendChild(this.thead);
         this.table.appendChild(this.tbody);
-        this.elementParent.appendChild(this.table);
+        this.divContainer.appendChild(this.divTitleBar);
+        this.divContainer.appendChild(this.table);
+        this.elementParent.appendChild(this.divContainer);
+    }
+
+    renderTitleBar() {
+        this.divTitleBar.innerHTML = `
+            <div><h2>${this.titulo}</h2></div>
+        `;
+            {/* <div><span>${this.cantRows}</span></div> */}
+
     }
 
     renderHeaders() {
@@ -57,7 +74,7 @@ class DataTable {
         this.tbody.appendChild(dFragment);
     }
 
-    insertarFilas(nuevasFilas) {
+    insertarFilas(datos) {
         let dFragment = document.createDocumentFragment();
         let tr = document.createElement("tr");
         tr.id = Math.floor(Math.random() * 100);
@@ -65,7 +82,7 @@ class DataTable {
         td.innerHTML = `<input type="checkbox" class="iCheckBox">`;
         tr.appendChild(td);
 
-        nuevasFilas.forEach((fila) => {
+        datos.forEach((fila) => {
             let td = document.createElement("td");
             td.textContent = fila;
             tr.appendChild(td);
@@ -113,6 +130,7 @@ class DataTable {
 }
 
 let contents = {
+    titulo: "Peliculas",
     headers: ["id", "nombre", "apellido", "telefono", "correo"],
     trs: [
         {
