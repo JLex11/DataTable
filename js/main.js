@@ -66,7 +66,15 @@ class DataTable {
 
             for (let i in t) {
                 let td = document.createElement("td");
-                td.textContent = t[i];
+                if (typeof t[i] == 'array' || typeof t[i] == 'object') {
+                    td.innerHTML = `<select></select>`;
+                    let select = td.querySelector('select');
+                    t[i].forEach(i => {
+                        select.innerHTML += `<option value="${i}">${i}</option>`;
+                    })
+                } else {
+                    td.textContent = t[i];
+                }
                 tr.appendChild(td);
             }
             dFragment.appendChild(tr);
@@ -144,7 +152,7 @@ let contents = {
             id: "00008",
             nombre: "Carlos",
             apellido: "Posada",
-            telefono: "3127249875",
+            telefono: ["3127249875", "3189765463"],
             correo: "Carlos@gmail.com",
         },
         {
@@ -152,12 +160,12 @@ let contents = {
             nombre: "Juan",
             apellido: "Jaramillo",
             telefono: "3137497463",
-            correo: "Juan@gmail.com",
+            correo: ["Juan@gmail.com", "Juanca@hotmail.com", "Juancho@outlook.com"],
         },
         {
             id: "00018",
             nombre: "Esteban",
-            apellido: "Perez",
+            apellido: ["Perez", "Calle"],
             telefono: "3127249875",
             correo: "nombre@gmail.com",
         },
