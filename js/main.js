@@ -109,7 +109,6 @@ class DataTable {
                 hijo.classList.add("editableOn");
             }
         });
-        return datosEditados;
     }
 }
 
@@ -176,14 +175,10 @@ btn_eliminar.addEventListener("click", () => {
 let btn_editar = document.getElementById("editar");
 btn_editar.addEventListener("click", () => {
     let iCheckBox = document.querySelectorAll(".iCheckBox");
-    let camposEditados = [];
     iCheckBox.forEach((check) => {
         if (check.checked) {
-            let idFila = check.parentNode.parentNode.id;
-            let datosEditados = tabla.editarFilas(idFila);
-            camposEditados.push(datosEditados);
+            let idFila = check.parentNode.parentNode;
+            tabla.editarFilas(idFila.id);
         }
     });
-    console.log('campos editados');
-    console.log(camposEditados);
 });
