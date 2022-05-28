@@ -21,6 +21,7 @@ class DataTable {
         this.headers = contents.headers;
         this.trs = contents.trs;
         this.cantRows = Object.getOwnPropertyNames(this.trs).length - 1;
+        this.makeTable();
     }
 
     makeTable() {
@@ -158,18 +159,18 @@ let contents = {
             nombre: "Carlos",
             apellido: "Posada",
             telefono: ["3127249875", "3189765463"],
-            correo: "Carlos@gmail.com",
+            correo: ["Carlos@gmail.com", "Juanca@hotmail.com", "Juancho@outlook.com"],
         },
         {
             id: "0029",
             nombre: "Juan",
             apellido: "Jaramillo",
-            telefono: "3137497463",
-            correo: ["Juan@gmail.com", "Juanca@hotmail.com", "Juancho@outlook.com"],
+            telefono: ["3137497463", "3176856388"],
+            correo: ["Juan@gmail.com", "Juanca@hotmail.com", "Juancho@outlook.com", "Carlos@gmail.com"],
         },
         {
             id: "00018",
-            nombre: "Esteban",
+            nombre: ["Esteban", "Juan"],
             apellido: ["Perez", "Calle"],
             telefono: "3127249875",
             correo: "nombre@gmail.com",
@@ -177,7 +178,6 @@ let contents = {
     ],
 };
 let tabla = new DataTable("#datatable-container", contents);
-tabla.makeTable();
 
 let formulario = document.getElementById("formulario");
 formulario.addEventListener("submit", (e) => {
